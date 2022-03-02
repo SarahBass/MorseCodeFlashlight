@@ -27,54 +27,19 @@ const userinputLabel = document.getElementById("userinputLabel");
 const wordLabel = document.getElementById("wordLabel");
 /*--- Create Local Variables for Information Storage ---*/
 background.image = "start.png";
+let spacenumber = 0;
 let buttonnumber = 0;
 let playnumber = 0;
 let gamenumber = 0;
-let morsecode = "-.";
+let morsecode = "";
 let morse = "";
 let letternumber = 0;
-let letter = " ";
+let letter = "";
 const characters ='abcdefghijklmnopqrstuvwxyz1234567890';
 const myArray = morsecode.split("");
 let word = "";
 
-   /*--- Assign Values based on input Letter---*/
-   if (morsecode == ".-") {letter == 'a'}
-   if (morsecode == "-...") {letter == 'b'}
-   if (morsecode == "-.-."){letter == 'c'}
-   if (morsecode == "-.."){letter == 'd'}
-   if (morsecode == "."){letter == 'e'}
-   if (morsecode == "..-."){letter == 'f'}
-   if (morsecode == "--."){letter == 'g'}
-   if (morsecode == "...."){letter == 'h'}
-   if (morsecode == ".."){letter == 'i'}
-   if (morsecode == ".---"){letter == 'j'}
-   if (morsecode == "-.-"){letter == 'k'}
-   if (morsecode = ".-.."){letter == 'l'}
-   if (morsecode = "--"){letter == 'm'}
-   if (morsecode = "-."){letter == 'n'}
-   if (morsecode = "---"){letter == 'o'}
-   if (morsecode = ".--."){letter == 'p'}
-   if (morsecode = "--.-"){letter == 'q'}
-   if (morsecode = ".-."){letter == 'r'}
-   if (morsecode = "..."){letter == 's'}
-   if (morsecode = "-"){letter == 't'}
-   if (morsecode = "..-"){letter == 'u'}
-   if (morsecode = "...-"){letter == 'v'}
-   if (morsecode = ".--"){letter == 'w'}
-   if (morsecode = "-..-"){letter == 'x'}
-   if (morsecode = "-.--"){letter == 'y'}
-   if (morsecode = "--.."){letter == 'z'}
-   if (morsecode = ".----"){letter == '1'}
-   if (morsecode = "..---"){letter == '2'}
-   if (morsecode = "...--"){letter == '3'}
-   if (morsecode = "....-"){letter == '4'}
-   if (morsecode = "....."){letter == '5'}
-   if (morsecode = "-...."){letter == '6'}
-   if (morsecode = "--..."){letter == '7'}
-   if (morsecode = "---.."){letter == '8'}
-   if (morsecode = "----."){letter == '9'}
-   if ({morsecode = "-----"){letter == '10'}
+  
 
 //Update the clock every second 
 clock.granularity = "seconds";
@@ -92,8 +57,51 @@ clock.ontick = (evt) => {
   let milliseconds = today.getMilliseconds();
 /*--- Update Stats for Screen ---*/
 checkAndUpdateBatteryLevel();
+
+   /*--- Assign Values based on input Letter---*/
+   if (morsecode == ".-"){letter = 'a'}
+   if (morsecode == "-..."){letter = 'b'}
+   if (morsecode == "-.-."){letter = 'c'}
+   if (morsecode == "-.."){letter = 'd'}
+   if (morsecode == "."){letter = 'e'}
+   if (morsecode == "..-."){letter = 'f'}
+   if (morsecode == "--."){letter = 'g'}
+   if (morsecode == "...."){letter = 'h'}
+   if (morsecode == ".."){letter = 'i'}
+   if (morsecode == ".---"){letter = 'j'}
+   if (morsecode == "-.-"){letter = 'k'}
+   if (morsecode == ".-.."){letter = 'l'}
+   if (morsecode == "--"){letter = 'm'}
+   if (morsecode == "-."){letter = 'n'}
+   if (morsecode == "---"){letter = 'o'}
+   if (morsecode == ".--."){letter = 'p'}
+   if (morsecode == "--.-"){letter = 'q'}
+   if (morsecode == ".-."){letter = 'r'}
+   if (morsecode == "..."){letter = 's'}
+   if (morsecode == "-"){letter = 't'}
+   if (morsecode == "..-"){letter = 'u'}
+   if (morsecode == "...-"){letter = 'v'}
+   if (morsecode == ".--"){letter = 'w'}
+   if (morsecode == "-..-"){letter = 'x'}
+   if (morsecode == "-.--"){letter = 'y'}
+   if (morsecode == "--.."){letter = 'z'}
+   if (morsecode == ".----"){letter = '1'}
+   if (morsecode == "..---"){letter = '2'}
+   if (morsecode == "...--"){letter = '3'}
+   if (morsecode == "....-"){letter = '4'}
+   if (morsecode == "....."){letter = '5'}
+   if (morsecode == "-...."){letter = '6'}
+   if (morsecode == "--..."){letter = '7'}
+   if (morsecode == "---.."){letter = '8'}
+   if (morsecode == "----."){letter = '9'}
+   if (morsecode == "-----"){letter = '10'}
   
-  if ((buttonnumber == 0) && (playnumber == 0)){
+  
+  if (buttonnumber == 0){
+    morseLabel.text = "morse: ";
+    userinputLabel.text = "next letter : " + letter;
+    wordLabel.text = word; 
+    if (spacenumber == 0){spacebutton.text = "Space";}
     menu.image = "blank.png";
   //activate button for dictionary
   menubutton.onactivate = function(evt) {
@@ -107,39 +115,82 @@ checkAndUpdateBatteryLevel();
   console.log("play number :" + playnnumber);}
 //activate spacebutton for space and print
  spacebutton.onactivate = function(evt) {
-   if (morse == morsecode){}
-   word += letter;
-    wordLabel.text = word;
- }
+   spacenumber++;
+   if (spacenumber == 1){
+     spacebutton.text = "Enter this letter?";
+     
+     button1.class = "clear text-button bottom left "; 
+                      button2.class = "clear text-button bottom right "; 
+                      button1.text = "yes"; 
+                      button2.text = "no"; 
+    button1.onactivate = function(evt) { word += letter; 
+                      button1.class = "none text-button bottom left "; 
+                      button2.class = "none text-button bottom right "; 
+                      button1.text = ""; 
+                      button2.text = ""; 
+                      spacebutton.text = "confirm";}
+   button2.onactivate = function(evt) { 
+                      button1.class = "none text-button bottom left "; 
+                      button2.class = "none text-button bottom right "; 
+                      button1.text = ""; 
+                      button2.text = ""; 
+                      spacebutton.text = "clear"
+                     for (let i = 0; i < morsecode.length; i++){
+                      morse = morse.slice(0, -1)}
+                      letter = "";
+                      console.log("morse:" + morse );
+                      morseLabel.text = "morse: " + morsecode;}
+     
+     }
+   if (spacenumber > 1){
+     spacebutton.text = "Entered";
+     morseLabel.text = "morse: ";
+     morsecode = "";
+     spacenumber = 0; 
+     letter = "";}
+   
+   console.log("space number :" + spacenumber);
+   console.log("morsecode :" + morsecode);
+   console.log("letter :" + letter);
+   console.log("word :" + word);
   
+ }
+  if (spacenumber == 0){
                       button1.class = "clear text-button bottom left "; 
                       button2.class = "clear text-button bottom right "; 
                       button1.text = "dah"; 
                       button2.text = "dih"; 
-                      if (morse.length < 4){button1.onactivate = function(evt) {
+                                           button1.onactivate = function(evt) {
                                                                                 vibration.start("ping");
                                                                                 morse  += "-";
+                                                                                morsecode  += "-";
                                                                                 console.log("morse:" + morse );
-                                                                                morseLabel.text = "morse: " + morse; }
+                                                                                morseLabel.text = "morse: " + morsecode; }
                                             button2.onactivate = function(evt) {vibration.start("bump");
                                                                                 morse  +=".";
+                                                                                morsecode  += ".";
                                                                                 console.log("morse:" + morse );
-                                                                                morseLabel.text = "morse: " + morse;}}
- }
+                                                                                morseLabel.text = "morse: " + morsecode;}
+ }}
   
   
   
   if (buttonnumber == 1){
+     userinputLabel.text = "";
+    wordLabel.text = " ";
+    morseLabel.text = " ";
   playnumber = 0;
   menubutton.onactivate = function(evt) {
   buttonnumber++;
-     if (buttonnumber > 1){buttonnumber = 0;}
+     if (buttonnumber == 2){buttonnumber = 0;}
   console.log("button number :" + buttonnumber);}
            button1.class = "none text-button bottom left "; 
                      button2.class = "none text-button bottom right "; 
                      playbutton.onactivate = function(evt) {}
                      button1.onactivate = function(evt) {}
                      button2.onactivate = function(evt) {}
+    spacebutton.onactivate = function(evt) {}
+    spacebutton.text = " ";
     menu.image = "book.png";
   }
  
