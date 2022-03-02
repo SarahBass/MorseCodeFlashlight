@@ -36,7 +36,7 @@ let morse = "";
 let letternumber = 0;
 let letter = "";
 let word = "";
-
+let j = 0;
 
 
   
@@ -251,63 +251,28 @@ checkAndUpdateBatteryLevel();
                      button1.onactivate = function(evt) {}
                      button2.onactivate = function(evt) {}
     spacebutton.onactivate = function(evt) {}
-  const myArray = morse.split("");
-   if (seconds%12 == 0) { 
-                         if (myArray[0] == '*'){ menu.image = "purple.png"; wordLabel.text = " ";}
-                         if (myArray[0] == '-'){ menu.image = "yellow.png"; wordLabel.text = "-";}             
-                         if (myArray[0] == '.'){ menu.image = "yellow.png"; wordLabel.text = ".";}}
-                       
-   if (seconds%12 == 1) { 
-                             if (myArray[0] == '*'){ menu.image = "purple.png"; wordLabel.text = " ";}
-                             if (myArray[0] == '-'){ menu.image = "yellow.png";wordLabel.text = "-";}
-                             if (myArray[0] == '.'){ menu.image = "purple.png";wordLabel.text = " "; }}
-    if (seconds%12 == 2) { 
-                         if (myArray[1] == '*'){ menu.image = "purple.png"; wordLabel.text = " ";}
-                         if (myArray[1] == '-'){ menu.image = "yellow.png"; wordLabel.text = "-";}             
-                         if (myArray[1] == '.'){ menu.image = "yellow.png"; wordLabel.text = ".";}}
-                       
-   if (seconds%12 == 3) { 
-                             if (myArray[1] == '*'){ menu.image = "purple.png"; wordLabel.text = " ";}
-                             if (myArray[1] == '-'){ menu.image = "yellow.png";wordLabel.text = "-";}
-                             if (myArray[1] == '.'){ menu.image = "purple.png";wordLabel.text = " "; }}
-    if (seconds%12 == 4) { 
-                         if (myArray[2] == '*'){ menu.image = "purple.png"; wordLabel.text = " ";}
-                         if (myArray[2] == '-'){ menu.image = "yellow.png"; wordLabel.text = "-";}             
-                         if (myArray[2] == '.'){ menu.image = "yellow.png"; wordLabel.text = ".";}}
-                       
-   if (seconds%12 == 5) { 
-                             if (myArray[2] == '*'){ menu.image = "purple.png"; wordLabel.text = " ";}
-                             if (myArray[2] == '-'){ menu.image = "yellow.png";wordLabel.text = "-";}
-                             if (myArray[2] == '.'){ menu.image = "purple.png";wordLabel.text = " "; }}
     
-    if (seconds%12 == 6) { 
-                         if (myArray[3] == '*'){ menu.image = "purple.png"; wordLabel.text = " ";}
-                         if (myArray[3] == '-'){ menu.image = "yellow.png"; wordLabel.text = "-";}             
-                         if (myArray[3] == '.'){ menu.image = "yellow.png"; wordLabel.text = ".";}}
+   if (j > (morse.length - 1)){j=0;};
+      const myArray = morse.split("");
+   if (seconds%3 == 0) { 
+                         if (myArray[j] == '*'){ menu.image = "purple.png"; wordLabel.text = "space";}
+                         if (myArray[j] == '-'){ menu.image = "yellow.png"; wordLabel.text = "-";}             
+                         if (myArray[j] == '.'){ menu.image = "yellow.png"; wordLabel.text = ".";}}
                        
-   if (seconds%12 == 7) { 
-                             if (myArray[3] == '*'){ menu.image = "purple.png"; wordLabel.text = " ";}
-                             if (myArray[3] == '-'){ menu.image = "yellow.png";wordLabel.text = "-";}
-                             if (myArray[3] == '.'){ menu.image = "purple.png";wordLabel.text = " "; }}
+   if (seconds%3 == 1) { 
+                             if (myArray[j] == '*'){ menu.image = "purple.png"; wordLabel.text = "space";}
+                             if (myArray[j] == '-'){ menu.image = "yellow.png";wordLabel.text = "-"; }
+                             if (myArray[j] == '.'){ menu.image = "purple.png";wordLabel.text = " ";}}
     
-    if (seconds%12 == 8) { 
-                             if (myArray[4] == '*'){ menu.image = "purple.png"; wordLabel.text = " ";}
-                             if (myArray[4] == '-'){ menu.image = "yellow.png";wordLabel.text = "-";}
-                             if (myArray[4] == '.'){ menu.image = "purple.png";wordLabel.text = " "; }}
-     if (seconds%12 == 9) { 
-                             if (myArray[4] == '*'){ menu.image = "purple.png"; wordLabel.text = " ";}
-                             if (myArray[4] == '-'){ menu.image = "yellow.png";wordLabel.text = "-";}
-                             if (myArray[4] == '.'){ menu.image = "purple.png";wordLabel.text = " "; }}
-     if (seconds%12 == 10) { 
-                             if (myArray[5] == '*'){ menu.image = "purple.png"; wordLabel.text = " ";}
-                             if (myArray[5] == '-'){ menu.image = "yellow.png";wordLabel.text = "-";}
-                             if (myArray[5] == '.'){ menu.image = "purple.png";wordLabel.text = " "; }}
-     if (seconds%12 == 11) { 
-                             if (myArray[5] == '*'){ menu.image = "purple.png"; wordLabel.text = " ";}
-                             if (myArray[5] == '-'){ menu.image = "yellow.png";wordLabel.text = "-";}
-                             if (myArray[5] == '.'){ menu.image = "purple.png";wordLabel.text = " "; }}
-
-    }                                         
+     if (seconds%3 == 2) { menu.image = "purple.png"; wordLabel.text = " "; j++;}
+                          
+                         
+   
+     /*---------------------------------------------------------------------------------------------------------*/
+    
+  
+        
+  }                               
  /*-------------------------------------- Battery Functions -------------------------------------*/
   display.addEventListener('change', function () { if (this.on) {checkAndUpdateBatteryLevel();}});
 }
