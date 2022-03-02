@@ -36,7 +36,7 @@ let morse = "";
 let letternumber = 0;
 let letter = "";
 const characters ='abcdefghijklmnopqrstuvwxyz1234567890';
-const myArray = morsecode.split("");
+const myArray = morse.split("");
 let word = "";
 
   
@@ -98,6 +98,12 @@ checkAndUpdateBatteryLevel();
   
   
   if (buttonnumber == 0){
+    if (word.length >9){
+      word = "";
+      morse = ""; 
+      morsecode="";
+      letter="";}
+    
     morseLabel.text = "morse: ";
     userinputLabel.text = "next letter : " + letter;
     wordLabel.text = word; 
@@ -179,6 +185,7 @@ checkAndUpdateBatteryLevel();
      userinputLabel.text = "";
     wordLabel.text = " ";
     morseLabel.text = " ";
+      spacebutton.text = "";
   playnumber = 0;
   menubutton.onactivate = function(evt) {
   buttonnumber++;
@@ -190,26 +197,48 @@ checkAndUpdateBatteryLevel();
                      button1.onactivate = function(evt) {}
                      button2.onactivate = function(evt) {}
     spacebutton.onactivate = function(evt) {}
-    spacebutton.text = " ";
+  
     menu.image = "book.png";
   }
  
     if (playnumber == 1){
-      menu.image = "blank.png";
+     userinputLabel.text = "";
+    wordLabel.text = " ";
+    morseLabel.text = "Start Flashlight?";
+      spacebutton.text = "yes or no?";
       //hide buttons
        menubutton.onactivate = function(evt) {}
-       button1.class = "none text-button bottom left "; 
-                     button2.class = "none text-button bottom right "; 
-                     button1.onactivate = function(evt) {}
-                     button2.onactivate = function(evt) {}
- for (let i = 0; i < morsecode.length; i++){
-       
-   if (milliseconds%3 == 0) { if (word == '-'){ menu.image = "yellow.png";}             
+       button1.class = "clear text-button bottom left "; 
+                     button2.class = "clear text-button bottom right "; 
+      button1.text = "yes";
+      button2.text = "no"
+                     button1.onactivate = function(evt) { playnumber= 2}
+                     button2.onactivate = function(evt) {playnumber = 3;}
+      
+      if (playnumber == 3){
+     userinputLabel.text = "Would you like yo start over?";
+    wordLabel.text = " ";
+    morseLabel.text = "Clear Morse";
+      spacebutton.text = "yes or no?";
+      //hide buttons
+       menubutton.onactivate = function(evt) {}
+       button1.class = "clear text-button bottom left "; 
+                     button2.class = "clear text-button bottom right "; 
+      button1.text = "yes";
+      button2.text = "no"
+                     button1.onactivate = function(evt) {word = "";
+      morse = ""; 
+      morsecode="";
+      letter=""; }
+                     button2.onactivate = function(evt) {playnumber = 0; buttonnumber=0;}
+ for (let i = 0; i < morse.length; i++){
+   word = myArray[i];    
+   if (seconds%3 == 0) { if (word == '-'){ menu.image = "yellow.png";}             
                          if (word == '.'){ menu.image = "yellow.png";}}
                        
-   if (milliseconds%3 == 1) { if (word == '-'){ menu.image = "yellow.png";}
+   if (seconds%3 == 1) { if (word == '-'){ menu.image = "yellow.png";}
                              if (word == '.'){ menu.image = "purple.png"; }}
-   if (milliseconds%3 == 2) {menu.image = "purple.png";}  
+   if (seconds%3 == 2) {menu.image = "purple.png";}  
    }
     }                                         
  /*-------------------------------------- Battery Functions -------------------------------------*/
