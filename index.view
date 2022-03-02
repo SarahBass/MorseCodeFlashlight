@@ -1,0 +1,50 @@
+<svg>
+  <!-- setting background -->
+  <svg><image id="background" x="0" y="0" width="100%" height="100%" class="background" /></svg>
+  <svg><image id="menu"  class="cuteanimate" /></svg>
+   <!-- battery information -->
+  <text id="batteryLabel" x="244" y="25" class="label" />
+  <text id="clockLabel" class="labelclock" />
+  <text id="locationLabel"  class="labellocation" />
+  
+  <use id="button-1" href="#text-button" class="none text-button bottom left "
+         fill = "yellow" font-family="System-Regular" font-size="500">
+    <set href="#text" attributeName="text-buffer" to=" " />
+    <set href="#text" attributeName="fill" to="white" />
+    <set href="#text" attributeName="y" to="12" />
+  </use>   
+    
+    <use id="button-2" href="#text-button" class="none text-button bottom right "
+        fill = "deeppink" font-family="System-Regular" font-size="500">
+    <set href="#text" attributeName="text-buffer" to=" " />
+    <set href="#text" attributeName="fill" to="white" />
+    <set href="#text" attributeName="y" to="12" />
+    </use>   
+    
+  <use id="menubutton" href="#text-button" y="80" x="-120" height="0"
+    fill="yellow" font-family="System-Regular" font-size="30">
+    <set href="#text" attributeName="text-buffer" to=" " />
+    <set href="#text" attributeName="fill" to="white" />
+    <set href="#text" attributeName="y" to="12" />
+  </use> 
+
+   <use id="playbutton" href="#text-button" y="80" x="120" height="0"
+    fill="yellow" font-family="System-Regular" font-size="40">
+    <set href="#text" attributeName="text-buffer" to=" " />
+    <set href="#text" attributeName="fill" to="white" />
+    <set href="#text" attributeName="y" to="12" />
+  </use> 
+  
+   <use id="spacebutton" href="#text-button" y="200" x="0" height="0"
+    fill="yellow" font-family="System-Regular" font-size="40">
+    <set href="#text" attributeName="text-buffer" to="space" />
+    <set href="#text" attributeName="fill" to="white" />
+    <set href="#text" attributeName="y" to="12" />
+  </use> 
+  
+   <!-- Data information -->
+  <text id="userinputLabel" class="labelpurple" />
+  <text id="wordLabel" class= "labelyellow"/> 
+   <text id="morseLabel" class="showLabel">  
+   </text>
+</svg>
