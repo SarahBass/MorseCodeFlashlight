@@ -35,9 +35,9 @@ let morsecode = "";
 let morse = "";
 let letternumber = 0;
 let letter = "";
-const characters ='abcdefghijklmnopqrstuvwxyz1234567890';
-const myArray = morse.split("");
 let word = "";
+
+
 
   
 
@@ -59,45 +59,45 @@ clock.ontick = (evt) => {
 checkAndUpdateBatteryLevel();
 
    /*--- Assign Values based on input Letter---*/
-   if (morsecode == ".-"){letter = 'a'}
-   if (morsecode == "-..."){letter = 'b'}
-   if (morsecode == "-.-."){letter = 'c'}
-   if (morsecode == "-.."){letter = 'd'}
-   if (morsecode == "."){letter = 'e'}
-   if (morsecode == "..-."){letter = 'f'}
-   if (morsecode == "--."){letter = 'g'}
-   if (morsecode == "...."){letter = 'h'}
-   if (morsecode == ".."){letter = 'i'}
-   if (morsecode == ".---"){letter = 'j'}
-   if (morsecode == "-.-"){letter = 'k'}
-   if (morsecode == ".-.."){letter = 'l'}
-   if (morsecode == "--"){letter = 'm'}
-   if (morsecode == "-."){letter = 'n'}
-   if (morsecode == "---"){letter = 'o'}
-   if (morsecode == ".--."){letter = 'p'}
-   if (morsecode == "--.-"){letter = 'q'}
-   if (morsecode == ".-."){letter = 'r'}
-   if (morsecode == "..."){letter = 's'}
-   if (morsecode == "-"){letter = 't'}
-   if (morsecode == "..-"){letter = 'u'}
-   if (morsecode == "...-"){letter = 'v'}
-   if (morsecode == ".--"){letter = 'w'}
-   if (morsecode == "-..-"){letter = 'x'}
-   if (morsecode == "-.--"){letter = 'y'}
-   if (morsecode == "--.."){letter = 'z'}
-   if (morsecode == ".----"){letter = '1'}
-   if (morsecode == "..---"){letter = '2'}
-   if (morsecode == "...--"){letter = '3'}
-   if (morsecode == "....-"){letter = '4'}
-   if (morsecode == "....."){letter = '5'}
-   if (morsecode == "-...."){letter = '6'}
-   if (morsecode == "--..."){letter = '7'}
-   if (morsecode == "---.."){letter = '8'}
-   if (morsecode == "----."){letter = '9'}
-   if (morsecode == "-----"){letter = '10'}
+   if (morsecode == ".-"){letter = 'a';}
+   if (morsecode == "-..."){letter = 'b';}
+   if (morsecode == "-.-."){letter = 'c';}
+   if (morsecode == "-.."){letter = 'd';}
+   if (morsecode == "."){letter = 'e';}
+   if (morsecode == "..-."){letter = 'f';}
+   if (morsecode == "--."){letter = 'g';}
+   if (morsecode == "...."){letter = 'h';}
+   if (morsecode == ".."){letter = 'i';}
+   if (morsecode == ".---"){letter = 'j';}
+   if (morsecode == "-.-"){letter = 'k';}
+   if (morsecode == ".-.."){letter = 'l';}
+   if (morsecode == "--"){letter = 'm';}
+   if (morsecode == "-."){letter = 'n';}
+   if (morsecode == "---"){letter = 'o';}
+   if (morsecode == ".--."){letter = 'p';}
+   if (morsecode == "--.-"){letter = 'q';}
+   if (morsecode == ".-."){letter = 'r';}
+   if (morsecode == "..."){letter = 's';}
+   if (morsecode == "-"){letter = 't';}
+   if (morsecode == "..-"){letter = 'u';}
+   if (morsecode == "...-"){letter = 'v';}
+   if (morsecode == ".--"){letter = 'w';}
+   if (morsecode == "-..-"){letter = 'x';}
+   if (morsecode == "-.--"){letter = 'y';}
+   if (morsecode == "--.."){letter = 'z';}
+   if (morsecode == ".----"){letter = '1';}
+   if (morsecode == "..---"){letter = '2';}
+   if (morsecode == "...--"){letter = '3';}
+   if (morsecode == "....-"){letter = '4';}
+   if (morsecode == "....."){letter = '5';}
+   if (morsecode == "-...."){letter = '6';}
+   if (morsecode == "--..."){letter = '7';}
+   if (morsecode == "---.."){letter = '8';}
+   if (morsecode == "----."){letter = '9';}
+   if (morsecode == "-----"){letter = '10';}
   
   
-  if (buttonnumber == 0){
+  if ((buttonnumber == 0) && (playnumber == 0)){
     if (word.length >9){
       word = "";
       morse = ""; 
@@ -118,7 +118,7 @@ checkAndUpdateBatteryLevel();
   playbutton.onactivate = function(evt) {
   playnumber++;
     if (playnumber > 1){playnumber = 0;}
-  console.log("play number :" + playnnumber);}
+  console.log("play number :" + playnumber);}
 //activate spacebutton for space and print
  spacebutton.onactivate = function(evt) {
    spacenumber++;
@@ -214,9 +214,10 @@ checkAndUpdateBatteryLevel();
       button2.text = "no"
                      button1.onactivate = function(evt) { playnumber= 2}
                      button2.onactivate = function(evt) {playnumber = 3;}
+    }
       
       if (playnumber == 3){
-     userinputLabel.text = "Would you like yo start over?";
+     userinputLabel.text = "Would you like to start over?";
     wordLabel.text = " ";
     morseLabel.text = "Clear Morse";
       spacebutton.text = "yes or no?";
@@ -226,18 +227,39 @@ checkAndUpdateBatteryLevel();
                      button2.class = "clear text-button bottom right "; 
       button1.text = "yes";
       button2.text = "no"
-                     button1.onactivate = function(evt) {word = "";
+                     button1.onactivate = function(evt) {
+      word = "";
       morse = ""; 
       morsecode="";
-      letter=""; }
-                     button2.onactivate = function(evt) {playnumber = 0; buttonnumber=0;}
- for (let i = 0; i < morse.length; i++){
-   word = myArray[i];    
-   if (seconds%3 == 0) { if (word == '-'){ menu.image = "yellow.png";}             
-                         if (word == '.'){ menu.image = "yellow.png";}}
+      letter=""; 
+     playnumber = 0; buttonnumber=0;              }
+                     button2.onactivate = function(evt) {playnumber = 0; buttonnumber=0;}}
+  
+  if (playnumber == 2){
+    console.log("playnumber: " + playnumber);
+    console.log("seconds: " + seconds);
+    console.log("morse:" + morse);
+      userinputLabel.text = "";
+    wordLabel.text = " ";
+    morseLabel.text = " ";
+      spacebutton.text = "";
+ 
+           menubutton.onactivate = function(evt) {}
+           button1.class = "none text-button bottom left "; 
+                     button2.class = "none text-button bottom right "; 
+                     playbutton.onactivate = function(evt) {}
+                     button1.onactivate = function(evt) {}
+                     button2.onactivate = function(evt) {}
+    spacebutton.onactivate = function(evt) {}
+  const myArray = morse.split("");
+ for (let j = 0; j < morse.length; j++){
+  let splitcode = myArray[j]; 
+   console.log("splitcode: " + splitcode);
+   if (seconds%3 == 0) { if (splitcode == '-'){ menu.image = "yellow.png";}             
+                         if (splitcode == '.'){ menu.image = "yellow.png";}}
                        
-   if (seconds%3 == 1) { if (word == '-'){ menu.image = "yellow.png";}
-                             if (word == '.'){ menu.image = "purple.png"; }}
+   if (seconds%3 == 1) { if (splitcode == '-'){ menu.image = "yellow.png";}
+                             if (splitcode == '.'){ menu.image = "purple.png"; }}
    if (seconds%3 == 2) {menu.image = "purple.png";}  
    }
     }                                         
