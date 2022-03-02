@@ -8,9 +8,9 @@ import * as util from "../common/utils";
 import { battery } from 'power';
 import { display } from "display";
 import { today as userActivity } from "user-activity";
-import {goals, today} from "user-activity";
 import { units } from "user-settings";
 import { vibration } from "haptics";
+import { geolocation } from "geolocation";
 
 /*--- Import Information from index.gui ---*/
 const playbutton = document.getElementById("playbutton");
@@ -21,12 +21,14 @@ const button2 = document.getElementById("button-2");
 let background = document.getElementById("background");
 let menu = document.getElementById("menu");
 // Get a handle on the <text> elements 
+const clockLabel = document.getElementById("clockLabel");
+const locationLabel = document.getElementById("locationLabel");
 const batteryLabel = document.getElementById("batteryLabel");
 const morseLabel = document.getElementById("morseLabel");
 const userinputLabel = document.getElementById("userinputLabel");
 const wordLabel = document.getElementById("wordLabel");
 /*--- Create Local Variables for Information Storage ---*/
-background.image = "start.png";
+background.image = "sos.png";
 let spacenumber = 0;
 let buttonnumber = 0;
 let playnumber = 0;
@@ -37,7 +39,8 @@ let letternumber = 0;
 let letter = "";
 let word = "";
 let j = 0;
-
+let k = 0;
+let sos = 0;
 
   
 
@@ -54,7 +57,7 @@ clock.ontick = (evt) => {
   let years = today.getFullYear();
   let mins = util.zeroPad(today.getMinutes());
   let seconds = today.getSeconds();
-  let milliseconds = today.getMilliseconds();
+ 
 /*--- Update Stats for Screen ---*/
 checkAndUpdateBatteryLevel();
 
@@ -96,7 +99,82 @@ checkAndUpdateBatteryLevel();
    if (morsecode == "----."){letter = '9';}
    if (morsecode == "-----"){letter = '10';}
   
+  if (sos == 0) {
+    userinputLabel.text = "";
+    wordLabel.text = " ";
+    morseLabel.text = "Click Start to Enter";
+      spacebutton.text = "Click SOS for quick help";
+  playnumber = 0;
+  menubutton.onactivate = function(evt) {}
+  console.log("button number :" + buttonnumber);
+           button1.class = "clear text-button bottom left "; 
+                     button2.class = "clear text-button bottom right "; 
+                     button1.text = "start";
+                     button2.text = "SOS";
+                     playbutton.onactivate = function(evt) {}
+                     button1.onactivate = function(evt) {sos = 1;}
+                     button2.onactivate = function(evt) {sos = 2;}
+    spacebutton.onactivate = function(evt) {}
+    
+  }
   
+  if (sos == 2) {
+    hours = util.zeroPad(hours);
+    clockLabel.text = `${hours}:${mins}` + ": " + (months+1) + "/"+ dates +"/"+ years;
+    var watchID = geolocation.watchPosition(locationSuccess, locationError, { timeout: 60 * 1000 });
+
+function locationSuccess(position) {
+    console.log("Latitude: " + position.coords.latitude,
+                "Longitude: " + position.coords.longitude);
+  locationLabel.text = "la: " + position.coords.latitude + "Lo: " + position.coords.longitude ;
+}
+
+function locationError(error) {
+  console.log("Error: " + error.code,
+              "Message: " + error.message);
+}
+    
+    wordLabel.text = " ";
+    morseLabel.text = " ";
+      spacebutton.text = "";
+  playnumber = 0;
+  menubutton.onactivate = function(evt) {}
+  console.log("button number :" + buttonnumber);
+           button1.class = "none text-button bottom left "; 
+                     button2.class = "none text-button bottom right "; 
+                     playbutton.onactivate = function(evt) {}
+                     button1.onactivate = function(evt) {}
+                     button2.onactivate = function(evt) {}
+    spacebutton.onactivate = function(evt) {}
+  if (seconds%22 == 0){menu.image = "yellow.png"; wordLabel.text = "s";}
+    if (seconds%22 == 1){menu.image = "purple.png"; wordLabel.text = " ";}
+    if (seconds%22 == 2){menu.image = "yellow.png"; wordLabel.text = "s";} 
+    if (seconds%22 == 3){menu.image = "purple.png"; wordLabel.text = " ";}
+    if (seconds%22 == 4){menu.image = "yellow.png"; wordLabel.text = "s";} 
+    if (seconds%22 == 5){menu.image = "purple.png"; wordLabel.text = " ";}
+                      
+    if (seconds%22 == 6){menu.image = "yellow.png"; wordLabel.text = "o";} 
+    if (seconds%22 == 7){menu.image = "yellow.png"; wordLabel.text = "o";}
+    if (seconds%22 == 8){menu.image = "purple.png"; wordLabel.text = " ";}
+    if (seconds%22 == 9){menu.image = "yellow.png"; wordLabel.text = "o";} 
+    if (seconds%22 == 10){menu.image = "yellow.png"; wordLabel.text = "o";}    
+    if (seconds%22 == 11){menu.image = "purple.png"; wordLabel.text = " ";}
+    if (seconds%22 == 12){menu.image = "yellow.png"; wordLabel.text = "o";} 
+    if (seconds%22 == 13){menu.image = "yellow.png"; wordLabel.text = "o";} 
+    if (seconds%22 == 14){menu.image = "purple.png"; wordLabel.text = " ";}
+        
+    if (seconds%22 == 15){menu.image = "yellow.png"; wordLabel.text = "s";}
+    if (seconds%22 == 16){menu.image = "purple.png"; wordLabel.text = " ";}
+    if (seconds%22 == 17){menu.image = "yellow.png"; wordLabel.text = "s";} 
+    if (seconds%22 == 18){menu.image = "purple.png"; wordLabel.text = " ";}
+    if (seconds%22 == 19){menu.image = "yellow.png"; wordLabel.text = "s";} 
+    if (seconds%22 == 20){menu.image = "purple.png"; wordLabel.text = " ";} 
+                        
+    if (seconds%22 == 21){menu.image = "purple.png"; wordLabel.text = "sos";}  } 
+  
+   if (sos == 1){     
+     background.image = "start.png";
+                          
   if ((buttonnumber == 0) && (playnumber == 0)){
     if (word.length >9){
       word = "";
@@ -236,12 +314,27 @@ checkAndUpdateBatteryLevel();
                      button2.onactivate = function(evt) {playnumber = 0; buttonnumber=0;}}
   
   if (playnumber == 2){
+    
+    hours = util.zeroPad(hours);
+    clockLabel.text = `${hours}:${mins}` + ": " + (months+1) + "/"+ dates +"/"+ years;
+    var watchID = geolocation.watchPosition(locationSuccess, locationError, { timeout: 60 * 1000 });
+
+function locationSuccess(position) {
+    console.log("Latitude: " + position.coords.latitude,
+                "Longitude: " + position.coords.longitude);
+  locationLabel.text = "la: " + position.coords.latitude + "Lo: " + position.coords.longitude ;
+}
+
+function locationError(error) {
+  console.log("Error: " + error.code,
+              "Message: " + error.message);
+}
     console.log("playnumber: " + playnumber);
     console.log("seconds: " + seconds);
     console.log("morse:" + morse);
       userinputLabel.text = "";
-    
     morseLabel.text = " ";
+   
       spacebutton.text = "";
  
            menubutton.onactivate = function(evt) {}
@@ -251,28 +344,28 @@ checkAndUpdateBatteryLevel();
                      button1.onactivate = function(evt) {}
                      button2.onactivate = function(evt) {}
     spacebutton.onactivate = function(evt) {}
-    
+   
    if (j > (morse.length - 1)){j=0;};
-      const myArray = morse.split("");
+  
+    const myArray = morse.split("");
    if (seconds%3 == 0) { 
                          if (myArray[j] == '*'){ menu.image = "purple.png"; wordLabel.text = "space";}
                          if (myArray[j] == '-'){ menu.image = "yellow.png"; wordLabel.text = "-";}             
                          if (myArray[j] == '.'){ menu.image = "yellow.png"; wordLabel.text = ".";}}
                        
-   if (seconds%3 == 1) { 
+   if (seconds%3 == 1) {      
                              if (myArray[j] == '*'){ menu.image = "purple.png"; wordLabel.text = "space";}
                              if (myArray[j] == '-'){ menu.image = "yellow.png";wordLabel.text = "-"; }
                              if (myArray[j] == '.'){ menu.image = "purple.png";wordLabel.text = " ";}}
     
-     if (seconds%3 == 2) { menu.image = "purple.png"; wordLabel.text = " "; j++;}
+     if (seconds%3 == 2) { menu.image = "purple.png"; wordLabel.text = " "; j++; k++;}
                           
-                         
-   
+                       
      /*---------------------------------------------------------------------------------------------------------*/
     
   
         
-  }                               
+  } }                              
  /*-------------------------------------- Battery Functions -------------------------------------*/
   display.addEventListener('change', function () { if (this.on) {checkAndUpdateBatteryLevel();}});
 }
