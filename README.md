@@ -1,6 +1,8 @@
 # MorseCodeFlashlight
 Morse Code Flashlight for Fitbit Versa 3
 
+![](https://github.com/SarahBass/MorseCodeFlashlight/blob/main/2422DF18-D46C-4909-9615-1ABF371C1E15.jpeg)
+
 COST: free
 
 LINK: https://gallery.fitbit.com/details/9d2e5b6f-15ca-42a9-927b-bbd2463e280a
